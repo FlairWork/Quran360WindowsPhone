@@ -1,0 +1,96 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Quran360.IndexItems"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="728"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="Black" 
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Chart"
+    shell:SystemTray.IsVisible="False"
+    xmlns:local="clr-namespace:Quran360"
+    >
+
+    <phone:PhoneApplicationPage.Resources>
+        <local:CopyCompleteCommand x:Key="CopyCompleteCommand"/>
+        <local:CopyCommand x:Key="CopyCommand"/>
+        <local:ShareCommand x:Key="ShareCommand"/>
+        <local:TweetCommand x:Key="TweetCommand"/>
+        <local:EmailCommand x:Key="EmailCommand"/>
+        <local:SmsCommand x:Key="SmsCommand"/>
+        <local:SetCheckPointCommand x:Key="SetCheckPointCommand"/>
+        <local:SetBookmarkCommand x:Key="SetBookmarkCommand"/>
+
+        <toolkit:RelativeTimeConverter x:Key="RelativeTimeConverter"/>
+        <local:AppSettings x:Key="appSettings"></local:AppSettings>
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Image Style="{StaticResource InnerPageLogoStyle}"  MouseLeftButtonDown="Logo_Click"/>
+        <StackPanel Margin="0,0,0,0" Width="432" Orientation="Vertical">
+            <TextBlock Style="{StaticResource PageTitleStyle}" x:Name="pageTitle" Text="VERSES" Margin="0,70,0,0"/>
+            <TextBlock x:Name="transName" Text="{Binding Source={StaticResource appSettings}, Path=TransNameSetting, Mode=TwoWay}" Style="{StaticResource PageTitleStyle}" Margin="0" MouseLeftButtonDown="SelectTranslation_Click" />
+            <!--Double line list with text wrapping-->
+            <telerikPrimitives:RadDataBoundListBox  Margin="0,0,0,0" ScrollBarMode="Default" 
+                   x:Name="AllList" ItemTap="IndexItemsList_ItemTap" 
+                   DataContext="{Binding IndexItems}"  ItemsSource="{Binding IndexItems}" Height="629">
+                <telerikPrimitives:RadContextMenu.ContextMenu>
+                    <telerikPrimitives:RadContextMenu x:Name="menuIndexItem"
+                                                  Opening="OnMenuOpening" 
+                                                  Background="Black" Foreground="White">
+                        <telerikPrimitives:RadContextMenuItem Content="set readpoint"
+                                                          Command="{StaticResource SetCheckPointCommand}"/>
+                        <telerikPrimitives:RadContextMenuItem Content="set bookmark"
+                                                          Command="{StaticResource SetBookmarkCommand}"/>
+                        <telerikPrimitives:RadContextMenuItem Content="copy"
+                                                          Command="{StaticResource CopyCommand}"/>
+                        <telerikPrimitives:RadContextMenuItem Content="complete copy"
+                                                          Command="{StaticResource CopyCompleteCommand}"/>
+                        <telerikPrimitives:RadContextMenuItem Content="share"
+                                                          Command="{StaticResource ShareCommand}"/>
+                        <telerikPrimitives:RadContextMenuItem Content="tweet"
+                                                          Command="{StaticResource TweetCommand}"/>
+                    </telerikPrimitives:RadContextMenu>
+                </telerikPrimitives:RadContextMenu.ContextMenu>
+                <telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,0" Width="432" Orientation="Vertical">
+                            <TextBlock Text="{Binding order}" TextAlignment="Left" Style="{StaticResource SubItemTextStyle}" FontSize="{Binding TransVerseFontSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
+                            <TextBlock Text="{Binding AyahText}" TextAlignment="Right" Style="{StaticResource ArabicTextStyle}" FontSize="{Binding ArabicVerseFontSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
+                            <TextBlock Text="{Binding VerseText}" TextAlignment="Left" Style="{StaticResource SubItemTextStyle}" FontSize="{Binding TransVerseFontSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
+                            <StackPanel Margin="0,0,0,0" Width="432" Orientation="Horizontal">
+                                <TextBlock Text="(" Style="{StaticResource SubItemTextStyle}"  />
+                                <TextBlock Text="{Binding chapter_id}" Style="{StaticResource SubItemTextStyle}"  />
+                                <TextBlock Text=":" Style="{StaticResource SubItemTextStyle}" />
+                                <TextBlock Text="{Binding verse_id}" Style="{StaticResource SubItemTextStyle}" />
+                                <TextBlock Text=")" Style="{StaticResource SubItemTextStyle}" />
+                            </StackPanel>
+                            <Rectangle Height="1" Fill="#a0a638" Margin="0,5,0,5" />
+                        </StackPanel>
+                    </DataTemplate>
+                </telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+            </telerikPrimitives:RadDataBoundListBox>
+        </StackPanel>
+        <telerikPrimitives:RadBusyIndicator Background="Transparent" Foreground="#a0a638" BorderBrush="#a0a638"
+                                            x:Name="busyIndicator" IsRunning="True"
+                                            AnimationStyle="AnimationStyle7"/>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" Mode="Minimized" BackgroundColor="#8AB331">
+            <!--<shell:ApplicationBarIconButton IconUri="/Images/Add.png" Click="NewIncome_Click" Text="New Income"/>-->
+        <shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarMenuItem Text="pin to start"  Click="Pin_Click" />
+        </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

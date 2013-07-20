@@ -1,0 +1,144 @@
+﻿<Application 
+    x:Class="Quran360.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:Quran360="clr-namespace:Quran360"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:local="clr-namespace:Quran360"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!--Application Resources-->
+    <Application.Resources>
+        <Style x:Key="ArabicTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="FontFamily" Value=".\Fonts\UthmanicHafs1.otf#UthmanicHafs1"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style x:Key="ItemTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="Foreground" Value="#574922"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style x:Key="SubItemTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>  
+        <Style x:Key="DescTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style x:Key="SmallTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style x:Key="TaskNameStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextLargeStyle}">
+            <Setter Property="Foreground" Value="#574922"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style x:Key="NormalTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style x:Key="NotesTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="Foreground" Value="#574922"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style x:Key="TextBlockHeaderStyle" TargetType="TextBlock" >
+            <Setter Property="Foreground" Value="#574922"/>
+            <Setter Property="FontFamily" Value="PhoneFontFamilySemiLight"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,24,0,0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="TextBoxHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockHeaderStyle}">
+            <Setter Property="Margin" Value="12,24,0,-10"/>
+        </Style>
+        <Style x:Key="ListPickerHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockHeaderStyle}" >
+            <Setter Property="Margin" Value="12,24,0,-16"/>
+        </Style>
+
+        <DataTemplate x:Key="JumpListGroupHeaderTemplate">
+            <Grid Margin="0,0,0,22">
+                <Image Stretch="None" Source="/Images/JumpListHeader.png"/>
+                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Key}" FontWeight="Bold" Foreground="#574922" Margin="12,7,0,0"/>
+            </Grid>
+        </DataTemplate>
+        <ImageBrush ImageSource="/Images/innerPagesBackground.jpg" x:Key="InnerPageBackground"/>
+        <Style TargetType="Image" x:Key="InnerPageLogoStyle">
+            <Setter Property="Source" Value="/Images/innerPageLogo.png"/>
+            <Setter Property="Margin" Value="24,13,0,0"/>
+            <Setter Property="Stretch" Value="None"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style BasedOn="{StaticResource PhoneTextNormalStyle}" TargetType="TextBlock" x:Key="PageTitleStyle">
+            <Setter Property="Foreground" Value="#574922"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style BasedOn="{StaticResource PhoneTextLargeStyle}" x:Key="PanoramaHeaderButtonsStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#574922"/>
+            <Setter Property="FontSize" Value="28"/>
+        </Style>
+        <Style BasedOn="{StaticResource PanoramaHeaderButtonsStyle}" x:Key="PanoramaOverdueHeaderStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#574922"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style TargetType="controls:Pivot" x:Key="PivotStyle">
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+
+        <!--Chart palette brushes-->
+        <SolidColorBrush x:Key="Series1Brush" Color="{StaticResource PhoneForegroundColor}"/>
+        <SolidColorBrush x:Key="Series2Brush" Color="#FF5B00"/>
+        <SolidColorBrush x:Key="Series3Brush" Color="#5342D2"/>
+        <SolidColorBrush x:Key="Series4Brush" Color="#00B8FF"/>
+        <SolidColorBrush x:Key="Series5Brush" Color="#8B232E"/>
+        <SolidColorBrush x:Key="Series6Brush" Color="#17F8C0"/>
+        <SolidColorBrush x:Key="Series7Brush" Color="#FF4F3F"/>
+        <SolidColorBrush x:Key="Series8Brush" Color="#13CC60"/>
+
+        <SolidColorBrush x:Key="Series1BrushTransparent" Color="{StaticResource PhoneForegroundColor}" Opacity="0.5"/>
+        <SolidColorBrush x:Key="Series2BrushTransparent" Color="#FF5B00" Opacity="0.5"/>
+        <SolidColorBrush x:Key="Series3BrushTransparent" Color="#5342D2" Opacity="0.5"/>
+        <SolidColorBrush x:Key="Series4BrushTransparent" Color="#00B8FF" Opacity="0.5"/>
+        <SolidColorBrush x:Key="Series5BrushTransparent" Color="#8B232E" Opacity="0.5"/>
+        <SolidColorBrush x:Key="Series6BrushTransparent" Color="#17F8C0" Opacity="0.5"/>
+        <SolidColorBrush x:Key="Series7BrushTransparent" Color="#FF4F3F" Opacity="0.5"/>
+        <SolidColorBrush x:Key="Series8BrushTransparent" Color="#13CC60" Opacity="0.5"/>
+
+        <SolidColorBrush x:Key="Series1BorderBrush" Color="{StaticResource PhoneForegroundColor}"/>
+        <SolidColorBrush x:Key="Series2BorderBrush" Color="#FF9730"/>
+        <SolidColorBrush x:Key="Series3BorderBrush" Color="#8282F9"/>
+        <SolidColorBrush x:Key="Series4BorderBrush" Color="#3AE8FF"/>
+        <SolidColorBrush x:Key="Series5BorderBrush" Color="#963241"/>
+        <SolidColorBrush x:Key="Series6BorderBrush" Color="#92FFF1"/>
+        <SolidColorBrush x:Key="Series7BorderBrush" Color="#FF8680"/>
+        <SolidColorBrush x:Key="Series8BorderBrush" Color="#48FF92"/>
+
+        <SolidColorBrush x:Key="GrayedBrush" Color="{StaticResource PhoneSubtleColor}"/>
+    </Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--Required object that handles lifetime events for the application-->
+        <shell:PhoneApplicationService 
+            Launching="Application_Launching" Closing="Application_Closing" 
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    </Application.ApplicationLifetimeObjects>
+
+</Application>

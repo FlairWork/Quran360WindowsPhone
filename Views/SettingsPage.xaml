@@ -1,0 +1,94 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Quran360.Views.SettingsPage" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Quran360"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="Black"
+    Background="White"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False"
+    >
+
+    <phone:PhoneApplicationPage.Resources>
+        <local:AppSettings x:Key="appSettings"></local:AppSettings>
+    </phone:PhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="{StaticResource InnerPageBackground}">
+        <Image Style="{StaticResource InnerPageLogoStyle}"/>
+
+        <TextBlock Style="{StaticResource PageTitleStyle}" Margin="24,82,0,0" Text="SETTINGS" />
+
+        <ScrollViewer Margin="12,100,12,0"> 
+            <StackPanel> 
+                <TextBlock Text="QURAN TRANSLATION" Margin="10,25,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="Bold" MouseLeftButtonDown="SelectTranslation_Click" />
+                <TextBlock x:Name="transName" Text="{Binding Source={StaticResource appSettings}, Path=TransNameSetting, Mode=OneWay}" Style="{StaticResource ItemTextStyle}" Margin="10,5,0,15" MouseLeftButtonDown="SelectTranslation_Click" />
+                <TextBlock Text="Select a default Quran Translation." Style="{StaticResource NotesTextStyle}" Margin="10,5,0,0" MouseLeftButtonDown="SelectTranslation_Click" />
+                
+                <TextBlock Text="DISPLAY" Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                
+                <TextBlock Text="Chapter Sort" Style="{StaticResource ListPickerHeaderStyle}"/>
+                <telerikInput:RadListPicker x:Name="chapterSortPicker" SelectionChanged="ChapterSort_Changed" Foreground="Black" BorderBrush="Black" Background="Transparent"  >
+                </telerikInput:RadListPicker>
+                <!--
+                <TextBlock Text="Chapters in Arabic" Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                <telerikPrimitives:RadToggleSwitch x:Name="settingsArabicChapter" Margin="10,0,0,10" 
+                                           Foreground="Black" BorderBrush="Black"  Background="Black" 
+                                           CheckedChanged="OnSettingCheckedChanged" 
+                                           IsChecked="{Binding Source={StaticResource appSettings}, Path=DisplayArabicChaptersSetting, Mode=TwoWay}"/>
+                <TextBlock Text="Chapters Translation" Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                <telerikPrimitives:RadToggleSwitch x:Name="settingsTransChapter" Margin="10,0,0,10" 
+                                           Foreground="Black" BorderBrush="Black"  Background="Black" 
+                                           CheckedChanged="OnSettingCheckedChanged"
+                                           IsChecked="{Binding Source={StaticResource appSettings}, Path=DisplayTransChaptersSetting, Mode=TwoWay}"/>
+                -->
+                <TextBlock Text="Verses in Arabic " Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                <telerikPrimitives:RadToggleSwitch x:Name="settingsArabicVerse" Margin="10,0,0,10" 
+                                           Foreground="Black" BorderBrush="Black"  Background="Black" 
+                                           CheckedChanged="OnSettingCheckedChanged" 
+                                           IsChecked="{Binding Source={StaticResource appSettings}, Path=DisplayArabicVersesSetting, Mode=TwoWay}"/>
+                <TextBlock Text="Verses Translation " Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                <telerikPrimitives:RadToggleSwitch x:Name="settingsTransVerse" Margin="10,0,0,10" 
+                                           Foreground="Black" BorderBrush="Black" Background="Black" 
+                                           CheckedChanged="OnSettingCheckedChanged"
+                                           IsChecked="{Binding Source={StaticResource appSettings}, Path=DisplayTransVersesSetting, Mode=TwoWay}"/>
+                <TextBlock Text="ARABIC FONT SIZE" Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                <!--
+                <TextBlock Text="Chapter" Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                <TextBlock Text="{Binding Value, ElementName=arabicChapterFont}" Margin="10,15,0,-15" FontSize="18" Width="20" HorizontalAlignment="Right" />
+                <Slider Name="arabicChapterFont" Foreground="Black" BorderBrush="Black" Background="Black" Height="80" Width="432" Margin="0,-20,0,-40" SmallChange="2"  LargeChange="8"  Minimum="18" Maximum="48" Value="{Binding ArabicChapterFontSetting, Mode=TwoWay, Source={StaticResource appSettings}}" ValueChanged="OnSliderValueChanged" />
+                -->
+                <TextBlock Text="Verse" Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                <TextBlock Text="{Binding Value, ElementName=arabicVerseFont}" Margin="10,15,0,-15" FontSize="18" Width="20" HorizontalAlignment="Right" />
+                <Slider Name="arabicVerseFont" Foreground="Black" BorderBrush="Black"  Background="Black"  Height="80" Width="432" Margin="0,-20,0,-40" SmallChange="2"  LargeChange="8"  Minimum="18" Maximum="48" Value="{Binding ArabicVerseFontSetting, Mode=TwoWay, Source={StaticResource appSettings}}" ValueChanged="OnSliderValueChanged" />
+                
+                <TextBlock Text="TRANSLATION FONT SIZE" Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                <!--
+                <TextBlock Text="Chapter" Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                <TextBlock Text="{Binding Value, ElementName=transChapterFont}" Margin="10,15,0,-15" FontSize="18" Width="20" HorizontalAlignment="Right" />
+                <Slider Name="transChapterFont" Height="80" Foreground="Black" BorderBrush="Black" Background="Black"  Width="432" Margin="0,-20,0,-40" SmallChange="2" LargeChange="8"  Minimum="18" Maximum="48" Value="{Binding TransChapterFontSetting, Mode=TwoWay, Source={StaticResource appSettings}}" ValueChanged="OnSliderValueChanged" />
+                -->
+                <TextBlock Text="Verse" Margin="10,10,0,0" Style="{StaticResource NotesTextStyle}" FontWeight="SemiBold"  />
+                <TextBlock Text="{Binding Value, ElementName=transVerseFont}" Margin="10,15,0,-15" FontSize="18" Width="20" HorizontalAlignment="Right" />
+                <Slider Name="transVerseFont" Height="80" Foreground="Black" BorderBrush="Black" Background="Black"   Width="432" Margin="0,-20,0,-40" SmallChange="2"  LargeChange="8"  Minimum="18" Maximum="48" Value="{Binding TransVerseFontSetting, Mode=TwoWay, Source={StaticResource appSettings}}" ValueChanged="OnSliderValueChanged" />
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+<!--
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" BackgroundColor="#8AB331">
+            <shell:ApplicationBarIconButton IconUri="/Images/Save.png" Click="SaveButton_Click" Text="Save"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Cancel.png" Click="CancelButton_Click" Text="Cancel"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+-->
+</phone:PhoneApplicationPage>
