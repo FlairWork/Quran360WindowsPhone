@@ -104,7 +104,7 @@
 
                         <!--<TextBlock Grid.Column="1" Grid.Row="7" Text="pin to start" MouseLeftButtonDown="Pin_Click" Style="{StaticResource PhoneTextLargeStyle}" Foreground="#574922"  />-->
                         <TextBlock Grid.Column="1" Grid.Row="7" Text="purchase now" Width="Auto" MouseLeftButtonDown="Purchase_Click" Style="{StaticResource PhoneTextLargeStyle}" Foreground="#FFA0A638" FontWeight="Bold"  />
-                        <TextBlock Grid.Column="1" Grid.Row="8" Text="donate" Width="Auto" MouseLeftButtonDown="Donate_Click" Style="{StaticResource PhoneTextLargeStyle}" Foreground="#574922"  />
+                        <TextBlock Grid.Column="1" Grid.Row="8" Text="donate" Width="Auto" MouseLeftButtonDown="Donate_Click" Style="{StaticResource PhoneTextLargeStyle}" Foreground="#FFA0A638"  />
                         <TextBlock Grid.Column="1" Grid.Row="9" Text="rate this app" Width="Auto" MouseLeftButtonDown="Rate_Click" Style="{StaticResource PhoneTextLargeStyle}" Foreground="#574922"  />
                         <TextBlock Grid.Column="1" Grid.Row="10" Text="share this" Width="Auto" MouseLeftButtonDown="Share_Click" Style="{StaticResource PhoneTextLargeStyle}" Foreground="#574922"  />
                         <TextBlock Grid.Column="1" Grid.Row="11" Text="visit us online" Width="Auto" MouseLeftButtonDown="Visit_Click" Style="{StaticResource PhoneTextLargeStyle}" Foreground="#574922"  />
@@ -217,7 +217,7 @@
                 <StackPanel Margin="0,0,0,0" Width="420" Orientation="Vertical">
                     <!--Double line list with text wrapping-->
                     <ListBox x:Name="BookMarkList" ItemsSource="{Binding}" DataContext="{Binding}" SelectionChanged="BookmarkList_SelectionChanged"
-                      Height="Auto" Foreground="Black" VerticalAlignment="Stretch" FontSize="28" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="0,0,0,0">
+                      Height="500"  Foreground="Black" VerticalAlignment="Stretch" FontSize="28" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="0,0,0,0">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="0,0,0,0" Width="432" Orientation="Vertical">
